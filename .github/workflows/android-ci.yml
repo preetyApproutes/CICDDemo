@@ -47,7 +47,7 @@ jobs:
         run: ./gradlew detekt --no-daemon || true
 
       - name: Run Unit Tests
-        run: ./gradlew test${{ matrix.buildType }}UnitTest --no-daemon
+        run: ./gradlew test${{ matrix.flavor }}${{ matrix.buildType }}UnitTest --no-daemon
 
       - name: Build APK for matrix flavors
         run: |
