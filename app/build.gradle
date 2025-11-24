@@ -21,13 +21,11 @@ android {
     productFlavors {
         dev {
             dimension "environment"
-            applicationIdSuffix ".dev"
-            versionNameSuffix "-dev"
+            signingConfig signingConfigs.debug
         }
         staging {
             dimension "environment"
-            applicationIdSuffix ".staging"
-            versionNameSuffix "-staging"
+            signingConfig signingConfigs.debug
         }
         prod {
             dimension "environment"
