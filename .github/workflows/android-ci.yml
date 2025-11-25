@@ -84,8 +84,8 @@ jobs:
           mkdir -p app
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/release-key.jks
 
-      - name: Install dependencies (Gradle Sync)
-        run: ./gradlew --no-daemon --stacktrace help
+#      - name: Install dependencies (Gradle Sync)
+#        run: ./gradlew --no-daemon --stacktrace help
 
       - name: Configure Signing Properties
         run: |
