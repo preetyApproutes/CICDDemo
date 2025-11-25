@@ -27,7 +27,6 @@ jobs:
         run: |
           mkdir -p app
           echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/release-key.jks
-          ls -al app   # debugging
 
       - name: Build Signed APK
         run: ./gradlew assembleProdRelease --stacktrace
