@@ -27,14 +27,8 @@ android {
         }
     }
 
-    flavorDimensions += "environment"
-
     productFlavors {
         dev {
-            dimension "environment"
-            signingConfig signingConfigs.debug
-        }
-        staging {
             dimension "environment"
             signingConfig signingConfigs.debug
         }
@@ -43,7 +37,6 @@ android {
             signingConfig signingConfigs.release
         }
     }
-
     buildTypes {
         release {
             signingConfig signingConfigs.release

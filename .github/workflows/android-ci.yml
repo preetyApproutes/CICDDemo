@@ -81,9 +81,11 @@ jobs:
 
       - name: Decode Keystore
         run: |
-          echo "$KEYSTORE_BASE64" | base64 -d > app/release-key.jks
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
+          mkdir -p app
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > app/release-key.jks
+
+      - name: Install dependencies (Gradle Sync)
+        run: ./gradlew --no-daemon --stacktrace help
 
       - name: Configure Signing Properties
         run: |
