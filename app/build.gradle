@@ -16,6 +16,17 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        debug { }
+        release {
+            storeFile file("release-key.jks")
+            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+            keyAlias System.getenv("ANDROID_KEY_ALIAS")
+            keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+        }
+    }
+
     flavorDimensions += "environment"
 
     productFlavors {
@@ -29,16 +40,7 @@ android {
         }
         prod {
             dimension "environment"
-        }
-    }
-    signingConfigs {
-        debug {
-        }
-        release {
-            storeFile file("release-key.jks")
-            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
-            keyAlias System.getenv("ANDROID_KEY_ALIAS")
-            keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+            signingConfig signingConfigs.release
         }
     }
 
@@ -49,16 +51,6 @@ android {
         }
     }
 
-   /* buildTypes {
-        debug { }
-        release {
-            minifyEnabled true
-            shrinkResources true
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro"
-        }
-
-    }*/
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -67,6 +59,7 @@ android {
         jvmTarget = '17'
     }
 }
+
 
 dependencies {
 
