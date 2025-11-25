@@ -16,40 +16,50 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    // Required globally
-    flavorDimensions "environment"
-
-    signingConfigs {
-        debug { }
-        release {
-            storeFile file(System.getenv("KEYSTORE_PATH") ?: "release-key.jks")
-            storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
-            keyAlias System.getenv("ANDROID_KEY_ALIAS")
-            keyPassword System.getenv("ANDROID_KEY_PASSWORD")
-        }
-    }
+    flavorDimensions += "environment"
 
     productFlavors {
-       /* dev {
+        dev {
             dimension "environment"
             signingConfig signingConfigs.debug
-        }*/
+        }
+        staging {
+            dimension "environment"
+            signingConfig signingConfigs.debug
+        }
         prod {
             dimension "environment"
-            signingConfig signingConfigs.release
+        }
+    }
+    signingConfigs {
+        debug {
+        }
+        release {
+
+                storeFile file(RELEASE_STORE_FILE)
+                storePassword RELEASE_STORE_PASSWORD
+                keyAlias RELEASE_KEY_ALIAS
+                keyPassword RELEASE_KEY_PASSWORD
         }
     }
 
     buildTypes {
-        debug { }
-
         release {
+            signingConfig signingConfigs.release
             minifyEnabled false
-            // DO NOT SET signingConfig here
         }
     }
 
+   /* buildTypes {
+        debug { }
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+        }
+
+    }*/
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
@@ -60,6 +70,7 @@ android {
 }
 
 dependencies {
+
     implementation libs.androidx.core.ktx
     implementation libs.androidx.appcompat
     implementation libs.material
