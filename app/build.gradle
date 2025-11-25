@@ -32,6 +32,8 @@ android {
         }
     }
     signingConfigs {
+        debug {
+        }
         release {
             storeFile file("release-key.jks")
             storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
