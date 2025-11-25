@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        flavor: [ dev, prod ]
+        flavor: [ prod ]
         buildType: [ debug, release ]
 
     steps:
