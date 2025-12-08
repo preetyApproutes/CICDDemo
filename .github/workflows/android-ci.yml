@@ -8,6 +8,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     env:
       ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
       ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
@@ -24,7 +25,7 @@ jobs:
           java-version: 17
           cache: gradle
 
-      - name: Give gradlew execute permission
+      - name: Grant gradlew permission
         run: chmod +x gradlew
 
       - name: Decode Keystore
@@ -32,11 +33,13 @@ jobs:
           mkdir -p app
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > app/release-key.jks
 
-      - name: Build Signed APK
-        run: ./gradlew assembleProdRelease --stacktrace
+      - name: Install Bundler & Fastlane
+        run: |
+          gem install bundler
+          bundle install
 
-      - name: Build Signed AAB
-        run: ./gradlew bundleProdRelease --stacktrace
+      - name: Build Prod Release via Fastlane
+        run: bundle exec fastlane android prod_release
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
