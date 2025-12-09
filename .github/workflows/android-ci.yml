@@ -29,8 +29,14 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
-          bundler: '2.4.22'
+          bundler: '2.7.2'
           bundler-cache: true
+
+      - name: Install Bundler 2.7.2
+        run: gem install bundler -v 2.7.2
+
+      - name: Install gems
+        run: bundle _2.7.2_ install
 
 
       - name: Grant gradlew permission
