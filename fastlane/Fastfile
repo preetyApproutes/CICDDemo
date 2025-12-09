@@ -1,27 +1,22 @@
 default_platform(:android)
 
 platform :android do
-
   desc "Build signed APK and AAB for prod"
   lane :prod_release do
+
     gradle(
-      project_dir: "..",
-      gradle_path: "./gradlew",
       task: "clean"
     )
 
     gradle(
-      project_dir: "..",
-      gradle_path: "./gradlew",
       task: "assembleProdRelease",
       print_command: true
     )
 
     gradle(
-      project_dir: "..",
-      gradle_path: "./gradlew",
       task: "bundleProdRelease",
       print_command: true
     )
+
   end
 end
