@@ -25,6 +25,12 @@ jobs:
           java-version: 17
           cache: gradle
 
+      - name: Set up Ruby & Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true
+
       - name: Grant gradlew permission
         run: chmod +x gradlew
 
@@ -32,11 +38,6 @@ jobs:
         run: |
           mkdir -p app
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > app/release-key.jks
-
-      - name: Install Bundler & Fastlane
-        run: |
-          gem install bundler
-          bundle install
 
       - name: Build Prod Release via Fastlane
         run: bundle exec fastlane android prod_release
