@@ -14,6 +14,8 @@ class WebAppInterface(private val context: Context) {
 
     @JavascriptInterface
     fun setResult() {
+
+
         Toast.makeText(context, "setResult() Called", Toast.LENGTH_SHORT).show()
     }
 
